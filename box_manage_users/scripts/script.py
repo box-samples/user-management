@@ -20,7 +20,7 @@ class Script(object):
         self._tw.sep('#', self._title, green=True, bold=True)
         self._client = TCClient()
         self._logger.info(
-            'Great! Let\'s get this going!'
+            'Great! Let\'s get this going!\n'
             '    		_      _      _\n'
             '      >(.)__ <(.)__ =(.)__\n'
             '       (___/  (___/  (___/ \n'
@@ -28,7 +28,6 @@ class Script(object):
         self._logger = setup_logging(self._verbose_log_filename, debug=True)
         self._fail_logger = setup_logging(self._failure_log_filename, name='failures')
         self._overview_logger = setup_logging(self._overview_log_filename, name='overview')
-        self._client = TCClient()
 
     def run(self):
         self._tw.sep('#', 'Process Complete!', green=True, bold=True)
