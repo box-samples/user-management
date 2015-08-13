@@ -13,7 +13,7 @@ def main():
     install_requires = ['boxsdk>=1.2.1', 'py>=1.4.30']
     setup(
         name='box_manage_users',
-        version='0.0.1',
+        version='0.0.2',
         description='Collection of useful scripts used by Box Technical Consulting',
         long_description=open(join(base_dir, 'README.rst')).read(),
         author='Box',
