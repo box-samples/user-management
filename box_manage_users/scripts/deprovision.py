@@ -24,9 +24,6 @@ class MassDeprovisionScript(Script):
 
     def delete_user(self, email, archive_email):
         # Log which user script is provisioning in:
-        # verbose.log
-        self._logger.info('\n----- Email: %s - Moving content to: %s -----\n', email, archive_email)
-        # overview.text
         self._overview_logger.info('\n\nEmail: %s - Moving content to: %s', email, archive_email)
 
         # Grab id associated with user's email

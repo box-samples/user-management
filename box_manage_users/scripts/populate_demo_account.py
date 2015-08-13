@@ -60,9 +60,6 @@ class PopulateDemoAccountScript(Script):
         Creates a new user and their own personal folder.
         """
         # Log which user script is provisioning in:
-        # verbose.log
-        self._logger.info('\n----- Email: %s - Name: %s -----\n', email, name)
-        # overview.text
         self._overview_logger.info('\n\nEmail: %s - Name: %s', email, name)
 
         #Create new enterprise user

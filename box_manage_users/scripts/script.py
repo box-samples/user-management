@@ -15,7 +15,7 @@ class Script(object):
     _overview_log_filename = os.path.join('logs', 'overview.log')
 
     def __init__(self):
-        self._logger = setup_logging()
+        self._logger = setup_logging(name='console')
         self._tw = TerminalWriter()
         self._tw.sep('#', self._title, green=True, bold=True)
         self._client = TCClient()
@@ -25,7 +25,7 @@ class Script(object):
             '      >(.)__ <(.)__ =(.)__\n'
             '       (___/  (___/  (___/ \n'
         )
-        self._logger = setup_logging(self._verbose_log_filename, debug=True)
+        self._verbose_logger = setup_logging(self._verbose_log_filename, debug=True)
         self._fail_logger = setup_logging(self._failure_log_filename, name='failures')
         self._overview_logger = setup_logging(self._overview_log_filename, name='overview')
 

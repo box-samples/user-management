@@ -25,7 +25,11 @@ class TCOAuth2(OAuth2):
         if client_secret is None:
             client_secret = raw_input('Please enter your client secret: ')
         if access_token is None:
-            access_token = raw_input('Please enter your developer token: ')
+            access_token = raw_input('Please enter your access/developer token: ')
+        if refresh_token is None:
+            refresh_token = raw_input('Please enter your refresh token (leave blank if using a developer token): ')
+            if not refresh_token:
+                refresh_token = None
         super(TCOAuth2, self).__init__(
             client_id,
             client_secret,
@@ -38,5 +42,8 @@ class TCOAuth2(OAuth2):
         )
 
     def _refresh(self, access_token):
-        self._access_token = raw_input('Developer token has expired. Please get a new one and enter it here: ')
-        return self._access_token, self._refresh_token
+        if self._refresh_token is not None:
+            return super(TCOAuth2, self)._refresh(access_token)
+        else:
+            self._access_token = raw_input('Developer token has expired. Please get a new one and enter it here: ')
+            return self._access_token, self._refresh_token

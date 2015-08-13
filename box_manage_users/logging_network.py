@@ -19,7 +19,7 @@ class LoggingNetwork(DefaultNetwork):
 
     def _log_response(self, response):
         if response.ok:
-            self.logger.info(response.content)
+            self._logger.info(response.content)
         else:
             self._logger.warning('%s\n%s\n%s\n', response.status_code, response.headers, pformat(response.content))
 

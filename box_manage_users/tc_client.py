@@ -72,9 +72,3 @@ class TCClient(Client):
         if not users:
             return None
         return users[0]
-
-
-if __name__ == '__main__':
-    setup_logging()
-    client = TCClient()
-    client.get_user('2015')
