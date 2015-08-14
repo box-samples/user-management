@@ -61,7 +61,12 @@ class TCClient(Client):
 
     @log_on_success('Updated collaboration with ID {collab_id}. New role: {new_role}.')
     def update_collab(self, collab_id, new_role):
-        return Collaboration(self._session, collab_id).update_info(new_role)
+        collab = Collaboration(self._session, collab_id)
+        url = collab.get_url()
+        data = {'role': new_role}
+        self._session.put(url, data=json.dumps(data), expect_json_response=False)
+        # TODO: remove above code and replace with below when Box API correctly returns the updated collab
+        # return Collaboration(self._session, collab_id).update_info(new_role)
 
     @log_on_success('Removed collaboration with ID {collab_id}.')
     def delete_collab(self, collab_id):
