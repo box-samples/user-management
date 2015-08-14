@@ -47,3 +47,7 @@ class MassDeprovisionScript(Script):
 
 def main():
     MassDeprovisionScript().run()
+
+
+if __name__ == '__main__':
+    main()

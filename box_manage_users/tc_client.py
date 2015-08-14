@@ -12,6 +12,9 @@ from box_manage_users.util import log_on_success, setup_logging
 
 
 class TCClient(Client):
+    """
+    Box SDK Client subclass with additional methods useful for user and collab management.
+    """
     def __init__(self, oauth=None, network_layer=None, session=None):
         oauth = oauth or TCOAuth2()
         super(TCClient, self).__init__(oauth, network_layer=LoggingNetwork(), session=session)

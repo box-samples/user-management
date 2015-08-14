@@ -12,52 +12,43 @@ class LoggingNetwork(DefaultNetwork):
     """
     def __init__(self):
         super(LoggingNetwork, self).__init__()
-        self._logger = setup_logging()
+        self._logger = setup_logging(name='network')
 
     def _log_request(self, method, url, **kwargs):
+        """
+        Logs information about the Box API request.
+
+        :param method:
+            The HTTP verb that should be used to make the request.
+        :type method:
+            `unicode`
+        :param url:
+            The URL for the request.
+        :type url:
+            `unicode`
+        :param access_token:
+            The OAuth2 access token used to authorize the request.
+        :type access_token:
+            `unicode`
+        """
         self._logger.info('%s %s %s', method, url, pformat(kwargs))
 
     def _log_response(self, response):
+        """
+        Logs information about the Box API response.
+
+        :param response: The Box API response.
+        """
         if response.ok:
             self._logger.info(response.content)
         else:
             self._logger.warning('%s\n%s\n%s\n', response.status_code, response.headers, pformat(response.content))
 
     def request(self, method, url, access_token, **kwargs):
+        """
+        Base class override. Logs information about an API request and response in addition to making the request.
+        """
         self._log_request(method, url, **kwargs)
         response = super(LoggingNetwork, self).request(method, url, access_token, **kwargs)
-        self._log_response(response)
-        return response
-
-
-from boxsdk.network.default_network import DefaultNetworkResponse
-
-
-class MockNetworkResponse(DefaultNetworkResponse):
-    def json(self):
-        return self._request_response
-
-    @property
-    def content(self):
-        import json
-        return json.dumps(self._request_response)
-
-    @property
-    def status_code(self):
-        return 200
-
-    @property
-    def ok(self):
-        return True
-
-
-class MockLoggingNetwork(LoggingNetwork):
-    def request(self, method, url, access_token, **kwargs):
-        content = {}
-        if method == 'DELETE':
-            content = None
-        else:
-            content['id'] = '2015'
-        response = MockNetworkResponse(content, access_token)
         self._log_response(response)
         return response

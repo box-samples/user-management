@@ -90,3 +90,7 @@ class PopulateDemoAccountScript(Script):
 
 def main():
     PopulateDemoAccountScript().run()
+
+
+if __name__ == '__main__':
+    main()

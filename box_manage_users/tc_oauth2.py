@@ -5,6 +5,11 @@ from boxsdk import OAuth2
 
 
 class TCOAuth2(OAuth2):
+    """
+    Box SDK OAuth2 subclass.
+    Allows for interactively asking the user for auth credentials.
+    When using a developer token, allows "refresh" of that token by interactively asking for a new one.
+    """
     def __init__(
             self,
             client_id=None,
@@ -42,6 +47,9 @@ class TCOAuth2(OAuth2):
         )
 
     def _refresh(self, access_token):
+        """
+        Base class override. If the user hasn't supplied a refresh token, just ask the user for a new access token.
+        """
         if self._refresh_token is not None:
             return super(TCOAuth2, self)._refresh(access_token)
         else:
